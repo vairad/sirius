@@ -1,0 +1,16 @@
+{
+    "name": "olie/sirius",
+    "description": "Web skautského oddílu Sirius",
+    "require": {
+        "twig/twig": "1.*",
+        "twbs/bootstrap": "^3.3",
+        "tinymce/tinymce": ">= 4",
+        "apache/log4php": "^2.3"
+    },
+    "authors": [
+        {
+            "name": "Radek Vais",
+            "email": "olie@skaut.cz"
+        }
+    ]
+}

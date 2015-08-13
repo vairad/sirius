@@ -1,0 +1,194 @@
+body{
+    background-color: rgb(10,11,13);
+}
+
+a{
+    color: #000000;
+}
+a:hover, a:focus{
+    text-decoration: none;
+    color: #000000;
+}
+
+.breadcrumb a{
+    padding: 4px;
+}
+.breadcrumb a:hover, .breadcrumb a:focus{
+    background-color: rgb(245,198,1);
+    background-image: none;
+    /*background-image: linear-gradient(to bottom, rgba(240, 128, 0, 0.80) 0px, rgb(245, 198, 1) 100%);*/
+    border-radius: 4px;
+}
+.breadcrumb{
+    margin-bottom: 0px;
+}
+
+/*********************************************************************************************************/
+/*menu*/
+
+.right-menu{
+    margin-top: 10px;
+}
+
+.menu .list-group-item.active {
+    text-shadow: none;
+    color: #555;
+    background-image: linear-gradient(to bottom, rgb(245, 198, 1) 0px, rgba(240, 128, 0, 0.80) 100%);
+    background-repeat: repeat-x;
+    border-color: rgba(240, 128, 0, 0.80);
+    border-top: rgb(245, 198, 1);
+}
+.menu .list-group-item:hover, .menu .list-group-item:focus {
+    background-image: linear-gradient(to bottom, rgba(240, 128, 0, 0.80) 0px, rgb(245, 198, 1) 100%);
+    background-repeat: repeat-x;
+    border-width: 1px;
+    border-color:  rgba(240, 128, 0, 0.80);
+    border-bottom-color: rgb(245, 198, 1);
+}
+
+.menu .list-group-item:hover:first-child, .menu .list-group-item:focus:first-child{
+    border-top: 1px solid #F08000;
+}
+
+.menu .list-group-item:hover:last-child, .menu .list-group-item:focus:last-child {
+    border-bottom: 1px solid #F5C601;
+}
+
+.menu .list-group-item.active:first-child{
+    border-top: rgb(245, 198, 1);
+}
+
+.menu .list-group{
+    box-shadow: none;
+}
+
+/*********************************************************************************************************/
+
+
+
+.content{
+    background-color: lightgrey;
+    margin-top: 10px;
+    min-height: 425px;
+}
+.footer{
+    background-color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width:  49.5%;
+}
+.footer-left{
+    margin-right: 0.5%;
+}
+.footer-right{
+    margin-left: 0.5%;
+}
+.footer:hover, .footer:focus{
+    background-image: linear-gradient(to bottom, rgba(240, 128, 0, 0.80) 0px, rgb(245, 198, 1) 100%);
+    background-repeat: repeat-x;
+}
+.header{
+    padding: 0px;
+}
+
+.my-right{
+    padding-right: 0;
+}
+
+.rounded{
+    border-radius: 4px;
+}
+
+.float-left{
+    float: left;
+}
+.float-right{
+    float: right;
+}
+
+#navbar{
+    margin-top: 10px;
+    padding: 0px;
+}
+form .row{
+    margin-top: 5px;
+    margin-bottom: 10px;
+
+}
+
+.alert{
+    margin-top: 10px;
+}
+
+img.glyphicon{
+    height: 14px;
+}
+
+
+
+.table-striped > tbody > tr:nth-child(2n+1){
+    background-color: rgb(252, 255, 169);
+}
+.table-striped > tbody > tr:nth-child(2n){
+    background-color: #ffc35c;
+}
+
+h2{
+    margin-left: 20px;
+}
+
+.linkGame{
+    font-size: large;
+    padding: 4px;
+    margin: 4px;
+}
+.linkGame:hover, .linkGame:focus{
+    background-color: rgb(245,198,1);
+    background-image: linear-gradient(to bottom, rgba(240, 128, 0, 0.80) 0px, rgb(245, 198, 1) 100%);
+    border-radius: 4px;
+}
+
+
+.btn-info {
+    color: #444;
+    background-image: linear-gradient(to bottom, rgba(240, 128, 0, 0.80) 0px, rgb(245, 198, 1) 100%);
+    background-color: rgb(245, 198, 1);
+    border-color: rgba(240, 128, 0, 0.80);
+}
+
+.btn-info:hover, .btn-info:focus{
+    color: #444;
+    background-image: none;
+    border-color: rgba(240, 128, 0, 0.80);
+    background-color: rgba(240, 128, 0, 0.80);
+}
+
+.margin-bottom{
+    margin-bottom: 2%;
+}
+
+.inline{
+    display: inline;
+}
+
+.no-padding{
+    padding: 0px;
+}
+
+.fb-margin{
+    margin-right: 2%;
+    padding-right: 37.9%;
+}
+
+.margin-top{
+  margin-top: 5%;
+}
+
+.margin-top-min{
+    margin-top: 1%;
+}
+
+.margin-auto{
+    margin-left: 4%;
+    color: #808080;
+}

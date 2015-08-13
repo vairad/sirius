@@ -1,0 +1,62 @@
+<!-- MENU -->
+<div class="list-group my-right menu">
+    {% for item in menu %}
+    {% if item.href|length > 0 %}
+    <a href="{{ item.href }}#body" class="list-group-item  {{item.aktiv}} ">
+        <div class="nav nav-pills nav-stacked">
+            {{ item.text }}
+        </div>
+    </a>
+    {%endif%}
+    {% endfor %}
+</div>
+<!-- LOG FORM -->
+{% if logged == 0 %}
+
+<form method="post" action="index.php?do=login">
+    <ul class="list-group my-right">
+        <li class="list-group-item">
+
+            <input type="text" class="form-control" placeholder="E-mail" name="login">
+            <div class="input-group">
+                <input type="password" class="form-control" placeholder="Heslo" name="pass">
+                <input type="hidden" name="do" value="login">
+                                             <span class="input-group-btn">
+                                                 <button class="btn btn-default" type="submit">Přihlaš</button>
+                                             </span>
+            </div>
+            <a href="index.php?id=forgot" class="margin-auto">Zapomenuté heslo?</a>
+        </li>
+    </ul>
+</form>
+{% endif %}
+
+<!-- SIGNED MENU -->
+{% if logged > 0 %}
+<div class="list-group my-right menu">
+    {% for item in menu_member%}
+    {% if item.href|length > 0 %}
+    <a href="{{ item.href }}#body" class="list-group-item  {{item.aktiv}} ">
+        <div class="nav nav-pills nav-stacked">
+            {{ item.text }}
+        </div>
+    </a>
+    {%endif%}
+    {% endfor %}
+</div>
+{%endif%}
+
+<!-- ADMIN MENU -->
+{% if logged >= 99  %}
+<div class="list-group my-right menu">
+    {% for item in menu_admin %}
+    {% if item.href|length > 0 %}
+    <a href="{{ item.href }}#body" class="list-group-item  {{item.aktiv}} ">
+        <div class="nav nav-pills nav-stacked">
+            {{ item.text }}
+        </div>
+    </a>
+    {%endif%}
+    {% endfor %}
+</div>
+{%endif%}

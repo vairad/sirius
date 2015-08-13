@@ -1,0 +1,318 @@
+<!-- DATABÁZOVÉ HLÁŠKY -->
+
+{% for item in data.error %}
+<div class="alert alert-danger" role="alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Chyba:</span>
+    {{item}}
+</div>
+{% endfor %}
+
+{% if data.success|length > 0 %}
+<div class="alert alert-success" role="alert">
+    <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+    <span class="sr-only">OK:</span>
+    {{data.success}}
+</div>
+{% endif %}
+
+<!-- NADPIS H1 -->
+<h1 id="h1">{{nadpis}}</h1>
+{% if podtitul|length > 0 %}
+<h4>{{podtitul}}</h4>
+{% endif %}
+
+
+<!-- sPROSTÝ TEXT V HTML -->
+
+{% if content == 'text' %}
+{{obsah | raw}}
+<!-- REGISTRAČNÍ FORMULÁŘ -->
+{% elseif content == 'regform' %}
+<p>{{info}}</p>
+{% include 'default/form/regform.html' %}
+
+
+<!-- TABULKA UŽIVATELŮ -->
+{% elseif content == 'table_user' %}
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <tr> <th>Jméno</th> <th>Příjmení</th><th>Přezdívka</th>
+            <th>Věk</th><th>Pohlaví</th><th>Telefon</th><th>Mail</th>
+            {% if admin == 'typ' %}
+            <th>Typ účtu</th>
+            {% endif %}
+        </tr>
+        {%for user in users %}
+
+        <tr> <td>{{user.jmeno}}</td> <td>{{user.prijmeni}}</td><td>{{user.prezdivka}}</td>
+            <td>{{user.vek}}</td><td>{{user.pohlaviS}}</td><td>{{user.mobil}}</td><td>{{user.email}}</td>
+           {% if admin == 'typ' %}
+            <td>{{user.typuctuS}}</td>
+           {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<!-- JEDNA HRA -->
+{% elseif content == 'infoHra' %}
+<div class="row">
+    <div class="well well-sm col-xs-offset-1 col-xs-7">
+        <p><strong>Uvádějící:</strong> {{game.organizator}}</p>
+        <p><strong>Role:</strong> mužské:<strong>{{game.pocet_m}}</strong> ženské:<strong>{{game.pocet_z}}</strong> obojetné:<strong>{{game.pocet_h}}</strong></p>
+        <p><strong>Cena:</strong> {{game.cena}}Kč  <strong>Délka hry:</strong> {{game.delka}} minut</p>
+        <p><strong>WEB:</strong> <a href="{{game.web}}">{{game.web}}</a></p>
+    </div>
+    <img src="data/images/hry/{{game.id_hry}}.jpg" alt="IDG Graf nenalezen (Imerze, Drama, Gaming)" class="col-xs-offset-0 col-xs-3" />
+</div>
+
+<div class="row">
+    <div class="well well-sm col-xs-offset-1 col-xs-10">
+        <strong>Požadavky na hráče:</strong>
+        {{game.special | raw}}
+    </div>
+</div>
+
+<div class="row">
+    <div class="well col-xs-offset-1 col-xs-10">
+        <strong>Anotace:</strong>
+        {{game.popis | raw}}
+    </div>
+</div>
+
+
+<!-- JEDNO MISTO -->
+{% elseif content == 'infoMisto' %}
+<div class="row">
+    <div class="well well-sm col-xs-offset-1 col-xs-5">
+        <p><strong>Adresa:</strong> {{place.ulice}} {{place.cp}}</p>
+        <p><strong>GPS:</strong> {{place.gps}}</p>
+    </div>
+ </div>
+
+<div class="row">
+    <div class="well col-xs-offset-1 col-xs-10">
+        <strong>Popis a dobrava:</strong> {{place.popis | raw}}
+    </div>
+</div>
+
+<div class="row">
+    <iframe class="col-xs-offset-1 col-xs-10 margin-bottom" height="400" frameborder="0"
+            src="https://www.google.com/maps/embed/v1/place?q={{place.googleGPS}}&amp;key=AIzaSyCuiMWcsEq2cfIoYh9On-I_LqI_JVsvG1Y"></iframe>
+</div>
+
+<!-- LIST MEHO PROGRAMU -->
+{% elseif content == 'proglist' %}
+{{ obsah | raw}}
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <tr> <th>Čas začátku</th><th>Hra</th><th>Místo</th><th>Cena hry</th>
+            </tr>
+        {%for performance in performances %}
+        <tr> <td>{{performance.zacatek}}</td>
+            <td><a href="index.php?id=hry&amp;val={{performance.id_hry}}">{{performance.nazevhry}}</a></td>
+            <td><a href="index.php?id=misto&amp;val={{performance.id_mista}}">{{performance.nazev}}</a></td>
+            <td>{{performance.cena}} Kč</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h3>{{h3}}</h3>
+    {{ info | raw }}
+    <h4 class="col-xs-offset-1">Identifikace platby</h4>
+    <p class="col-xs-offset-1">Unikátní variabilní symbol: <strong>{{vs}}</strong></p>
+    <p class="col-xs-offset-1">Číslo účtu: <strong>{{ucet}}</strong></p>
+    <p class="col-xs-offset-1">Částka: <strong>{{cena}}</strong>Kč</p>
+    <p class="col-xs-offset-1">Již zaregistrované platby: <strong>0</strong>Kč</p>
+</div>
+
+<!-- LIST UVEDENI -->
+{% elseif content == 'orglist' %}
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <tr> <th>Čas začátku</th><th>Hra</th><th>Místo</th>
+        <th></th></tr>
+        {%for performance in performances %}
+        <tr> <td>{{performance.zacatek}}</td>
+            <td><a href="index.php?id=hry&amp;val={{performance.id_hry}}">{{performance.nazevhry}}</a></td>
+            <td><a href="index.php?id=misto&amp;val={{performance.id_mista}}">{{performance.nazev}}</a></td>
+            <td><a href="index.php?id=orghry&amp;val={{performance.id_uvedeni}}">Seznam hráčů</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<!-- NASTAVENI PRAV -->
+{% elseif content == 'rights' %}
+<h2>{{titleform}}</h2>
+<p>{{info}}</p>
+{% include 'default/form/rights.html' %}
+<h2>{{titlelist}}</h2>
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <tr> <th>Kdo</th><th>Práva</th>
+           <!-- <th></th> --> </tr>
+        {%for user in users %}
+
+        <tr> <td>{{user.jmeno}} {{user.prijmeni}} "{{user.prezdivka}}" </td> <td>{{user.typuctuS}}</td>
+            <!--  <td><button onclick="" class="btn btn-block btn-info">Napad...</button></td> -->
+          </tr>
+          {% endfor %}
+      </table>
+  </div>
+
+<!-- MUJ PROGRAM -->
+{% elseif content == 'mujpr' %}
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <tr> <th>Čas začátku</th><th>Hra</th><th>Místo</th><th>Cena hry</th>
+        </tr>
+
+        {%for performance in performances %}
+        <tr> <td>{{performance.zacatek}}</td> <td>{{performance.nazevhry}}</td><td>{{performance.nazev}}</td><td>{{performance.cena}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+  <!-- MANAGEMENT MISTO -->
+{% elseif content == 'smisto' %}
+{% for item in a %}
+<a href="{{item.href}}" class="btn btn-info" >{{item.title}}</a>
+{% endfor %}
+
+<p>{{info}}</p>
+
+<!-- LIST MISTO -->
+{% elseif content == 'lmisto' %}
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <tr> <th>Název</th><th>Adresa</th><th>GPS</th>
+        <th></th></tr>
+        {%for place in places %}
+        <tr> <td><a href="index.php?id=misto&amp;val={{place.id_mista}}" target="_blank">{{place.nazev}}</a></td> <td>{{place.ulice}} {{place.cp}}</td><td>{{place.gps}}</td>
+            <td><button onclick="{{place.delA}}" class="btn btn-sm btn-info">Smazat</button>
+                <button onclick="{{place.updateA}}" class="btn btn-sm btn-info">Upravit</button>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+<!-- LIST HRA -->
+{% elseif content == 'lhra' %}
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <tr> <th>Název</th><th>Muži</th><th>Ženy</th><th>Obojí</th><th>Délka</th><th>Cena</th>
+        <th></th></tr>
+        {%for game in games %}
+        <tr> <td>{{game.nazev}}</td>
+            <td>{{game.pocet_m}}</td>
+            <td>{{game.pocet_z}}</td>
+            <td>{{game.pocet_h}}</td>
+            <td>{{game.delka}}</td>
+            <td>{{game.cena}}</td>
+            <td><button onclick="{{game.delA}}" class="btn btn-sm btn-info">Smazat</button>
+                <button onclick="{{game.updateA}}" class="btn btn-sm btn-info">Upravit</button>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+<!-- SEZNAM HER -->
+{% elseif content == 'seznamHer' %}
+<div class="well">
+    {%for game in games %}
+    <a href="index.php?id=hry&amp;val={{game.id_hry}}#body" class="linkGame"><span>{{game.nazev}}</span></a>
+    {% endfor %}
+</div>
+
+
+<!-- CREATE UVEDENI -->
+{% elseif content == 'vuved' %}
+<h2>{{titleform}}</h2>
+<p>{{info}}</p>
+{% include 'default/form/create_performance.html' %}
+<h2>{{titlelist}}</h2>
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <tr> <th>Čas začátku</th><th>Hra</th><th>Místo</th>
+            <th>M</th><th>Ž</th><th>H</th>
+            <th>Muži</th><th>Ženy</th>
+            <th></th></tr>
+        {%for performance in performances %}
+
+        <tr> <td>{{performance.zacatek}}</td> <td>{{performance.nazevhry}}</td><td>{{performance.nazev}}</td>
+            <td>{{performance.pocet_m}}</td><td>{{performance.pocet_z}}</td><td>{{performance.pocet_h}}</td>
+            <td>{{performance.pm}}</td><td>{{performance.pz}}</td>
+            <td><button onclick="{{performance.delA}}" class="btn btn-block btn-info">Smazat</button></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<!-- CREATE MISTO -->
+{% elseif content == 'vmisto' %}
+<p>{{info}}</p>
+{% include 'default/form/create_misto.html' %}
+
+
+<!-- CREATE HRA -->
+{% elseif content == 'vhra' %}
+<p>{{info}}</p>
+{% include 'default/form/create_hra.html' %}
+
+<!-- CHANGE PASS -->
+{% elseif content == 'change_pass' %}
+<p>{{info}}</p>
+{% include 'default/form/change_pass.html' %}
+
+<!-- GENERATE PASS -->
+{% elseif content == 'forgot_pass' %}
+<p>{{info}}</p>
+{% include 'default/form/gen_pass.html' %}
+
+
+<!-- MUJ UCET -->
+{% elseif content == 'info_osoba' %}
+{% for item in a %}
+<a href="{{item.href}}" class="btn btn-info" >{{item.title}}</a>
+{% endfor %}
+
+<!-- PRIHLASOVANI -->
+{% elseif content == 'prihl' %}
+{% set foo = 0 %}
+{%for performance in performances %}
+{% if performance.z > separator[foo].time and separator[foo].time > 0 %}
+
+
+<div class="row col-xs-offset-1 col-ld-10 col-md-10 col-xs-10">
+    <h3>{{ separator[foo].text}}</h3>
+</div>
+{% set foo = foo + 1 %}
+{% endif %}
+
+
+<div class="row well well-sm col-xs-offset-1 col-ld-10 col-md-10 col-xs-10">
+
+        <form method="post" action="index.php?id=prihl">
+            <div class="col-xs-6">
+                <h4><a href="index.php?id=hry&amp;val={{performance.id_hry}}">{{performance.nazevhry}}</a></h4>
+                <p><strong>Začátek:</strong> {{performance.zacatek}} ({{performance.delka}} minut)</p>
+            </div>
+
+            <div class="col-xs-6">
+                <button type="submit" class="btn btn-sm btn-default center-block margin-top" {{performance.disabled}}>{{performance.submitVal}}</button>
+            </div>
+
+            <input type="hidden" name="action" value="{{performance.action}}">
+            <input type="hidden" name="val" value="{{performance.id_uvedeni}}">
+        </form>
+
+</div>
+{% endfor %}
+
+{% endif %}

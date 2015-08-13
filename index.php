@@ -33,7 +33,7 @@ require 'conf/style.inc.php';
 /** ========================================================================= */
 // nacist objekty - soubory .class.php
 require 'core/app.class.php';	                     // drzi hlavni funkcionalitu cele aplikace, obsahuje routing = navigovani po webu
-require '/db/db.class.php';		                	// zajisti pristup k db a spolecne metody pro dalsi pouziti
+require 'db/db.class.php';		                	// zajisti pristup k db a spolecne metody pro dalsi pouziti
 //require 'application/db/mistaDB.class.php';		// zajisti pristup ke konkretnim db tabulkam - objekt vetsinou zajisti pristup k cele sade souvisejicich tabulek
 //require 'application/db/osobyDB.class.php';
 //require 'application/db/hryDB.class.php';
@@ -48,6 +48,11 @@ require '/db/db.class.php';		                	// zajisti pristup k db a spolecne
 //require 'application/core/data/uvedeni.class.php';
 
 /** ========================================================================= */
+
+Logger::configure("./conf/logger.config.xml");
+$logger = Logger::getLogger("main");
+$logger->debug("Pouze jedna zpráva");
+
 // start the application
 $app = new app();
 $app->connectDB();

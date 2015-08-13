@@ -1,2 +1,5 @@
 #ignore idea settings
 /.idea/
+
+#ignore log folder with log files
+/log/

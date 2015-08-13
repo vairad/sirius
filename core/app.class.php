@@ -15,10 +15,7 @@ class app
     {
         $this->db = new db();
     }
-    public function GetConnection()
-    {
-        return $this->db->getConnection();
-    }
+
     /**
      * Pripojit k databazi.
      */

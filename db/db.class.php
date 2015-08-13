@@ -4,26 +4,37 @@
  */
 class db
 {
+
     private $connection = null;
+
+    /** Constructor of database connection */
+    public function db()
+    {
+    }
 
     /**
      * Connect to selected database type
      */
-    function Connect()
+    public function Connect()
     {
         if (DB_TYPE == 'mysql') {
             try {
                 $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',);
                 $this->connection = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_DATABASE_NAME . "", DB_USER_LOGIN, DB_USER_PASSWORD, $options);
             } catch (PDOException $e) {
-                debugPrint("Error!: " . $e->getMessage() . "<br/>");
+                $message = "Error!: " . $e->getMessage() . "<br/>";
+                debugPrint($message);
                 die();
             }
         } elseif (DB_TYPE == 'pgsql') {
-            debugPrint("PgSQL connectivity is NOT implemented");
+
+            $message = "PgSQL connectivity is NOT implemented";
+            debugPrint($message);
             die();
         } else {
-            debugPrint("Unknown database type. This type " . DB_TYPE . " is NOT implemented");
+
+            $message = "Unknown database type. This type " . DB_TYPE . " is NOT implemented";
+            debugPrint($message);
             die();
         }
     }
@@ -31,7 +42,7 @@ class db
     /**
      * Close database connection.
      */
-    function disconnect()
+    public function disconnect()
     {
         $this->connection = null;
     }

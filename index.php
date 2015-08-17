@@ -1,17 +1,16 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Radek
- * Date: 10. 8. 2015
- * Time: 14:52
- */
 
-//spustí session
 session_start();
 
 //load libraries prepared by composer
 require_once 'vendor/autoload.php';
 
+//prepare logger
+Logger::configure("./conf/logger.config.xml");
+$logger = Logger::getLogger("main");
+
+
+$logger->debug("Before loading of modules");
 /** ========================================================================= */
 /** @var array[] storage for data to show by twig*/
 $data = array();
@@ -49,15 +48,16 @@ require 'db/db.class.php';		                	// zajisti pristup k db a spolecne 
 
 /** ========================================================================= */
 
-Logger::configure("./conf/logger.config.xml");
-$logger = Logger::getLogger("main");
-$logger->debug("Pouze jedna zpráva");
+$logger->debug("After all modules loaded");
 
 // start the application
+$logger->debug("Create application");
 $app = new app();
+
+$logger->debug("Database connect");
 $app->connectDB();
 
-
+/*
 // process login or logout
 if(@$_REQUEST["do"] == "login"){
     $app->login();
@@ -65,18 +65,21 @@ if(@$_REQUEST["do"] == "login"){
 if(@$_REQUEST["do"] == "logout"){
     $app->logout();
 }
+*/
 
 /** debug part */
 // printr($data);
 /** debug part */
 
-//setup twig
+$logger->debug("Prepare twig template");
 Twig_Autoloader::register();
 $loader = new Twig_Loader_Filesystem('templates'); // path to folder with templates
 $twig = new Twig_Environment($loader); // no cache
 
-// load chosen template (see style.inc.php)
+$logger->debug("Load chosen template (see style.inc.php)");
 $template = $twig->loadTemplate(TEMPLATE);
 
-//compute output
+$logger->debug("Show result");
 echo $template->render($data);
+
+$logger->debug("End of index.php");

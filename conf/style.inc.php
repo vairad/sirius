@@ -27,4 +27,9 @@ $data["my_css"]=VIEW_TEMPLATES."/".NAME.".css";
 $data["header_img"]=VIEW_TEMPLATES."/picture/".NAME."_header.png";
 $data["favico"]=VIEW_TEMPLATES."/picture/".NAME."_favicon.png";
 
+
+// nastavení metadat
+$data ["meta_description"] = "Stránky skautského oddílu Sirius z Plzně Doubravky.";
+$data["meta_keywords"] = "skauting, junák, Sirius, děti, skauti, skautky, Plzeň, Doubravka";
+
 ?>

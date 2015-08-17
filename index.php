@@ -25,6 +25,7 @@ $data["success"] = array();
 require 'conf/config.inc.php';
 require 'conf/functions.inc.php'; //helpful functions
 require 'conf/style.inc.php';
+require 'conf/text.cs.php';
 //require 'conf/const.inc.php';
 
 

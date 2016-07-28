@@ -3,3 +3,7 @@
 
 #ignore log folder with log files
 /log/
+
+#ignore composer file composer.phar
+composer.phar
+

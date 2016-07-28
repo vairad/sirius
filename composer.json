@@ -4,8 +4,8 @@
     "require": {
         "twig/twig": "1.*",
         "twbs/bootstrap": "^3.3",
-        "tinymce/tinymce": ">= 4",
-        "apache/log4php": "^2.3"
+        "tinymce/tinymce": "4.2.4",
+        "apache/log4php": "2.3.0"
     },
     "authors": [
         {

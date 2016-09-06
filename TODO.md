@@ -21,4 +21,5 @@
 	* přihlašování (?? IS ??)
 	
 # Databáze
+    * aplikační objekty a patříčná spojení
 

@@ -1,0 +1,31 @@
+<div class="row-height">
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-6 col-sm-height content-column">
+        <div class="inside inside-full-height">
+            <div class="col-xs-12 content rounded">
+                <h1>Aktuality</h1>
+                {{field_1_content | raw}}
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-sm-height content-column">
+        <div class="inside inside-full-height">
+            <div class="col-xs-12 content rounded">
+                <h1>Akce</h1>
+                {%for event in events %}
+                    <h4>{{ event.date }} <strong>{{ event.name }}</strong></h4>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-2 col-sm-height content-column ">
+        <div class="inside inside-full-height">
+            <div class="col-xs-12 content rounded">
+                <h1>Facebook</h1>
+                <p>Na propojení s facebookem se pracuje.</p>
+            </div>
+        </div>
+    </div>
+</div>

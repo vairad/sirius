@@ -77,49 +77,25 @@
         <!-- SHOW AREA -->
         <div class="row">
             {% if content == 'title' %}
-
-            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-5 content-column">
-                <div class="col-xs-12 content rounded">
-                    <h1>{{nadpis}}</h1>
-                    {{obsah | raw}}
-                </div>
-
-            </div>
-
-            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-5 content-column rounded">
-                <div class="col-xs-12 content rounded">
-                    <h1>{{nadpis}}</h1>
-                    {{obsah | raw}}
-                </div>
-            </div>
-
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-2 content-column rounded">
-                <div class="col-xs-12 content rounded">
-                    <h1>{{nadpis}}</h1>
-                    <p>výstup z akcí...</p>
-                </div>
-            </div>
+                {% include 'default/content/title.html' %}
 
             {% endif %}
        </div>
 
-        <div class="row">
-            <!-- RIGHT BAR -->
-            <div class="col-xs-offset-0 col-xs-3 right-menu rounded my-right">
-                {% include 'default/menu.html' %}
-            </div>
-        </div>
-
         <!-- FOOTER -->
         <footer class="row">
             <a href="{{footer_left_a}}" target="_blank">
-                <div class="col-md-6 col-xs-12 footer footer-left rounded">
-                   <p class="text-center h4">{{footer_left}}</p>
+                <div class="col-md-6 col-xs-12 content-column">
+                    <div class="footer content rounded">
+                        <p class="text-center h4">{{footer_left}}</p>
+                    </div>
                 </div>
             </a>
             <a href="{{footer_right_a}}" target="_blank">
-                <div class=" col-md-6 col-xs-12 footer footer-right rounded">
-                    <p class="text-center h4">{{footer_right}}</p>
+                <div class="col-md-6 col-xs-12 content-column">
+                    <div class="footer content rounded">
+                        <p class="text-center h4">{{footer_right}}</p>
+                    </div>
                 </div>
             </a>
         </footer>
@@ -139,6 +115,8 @@
     <script src="{{bootstrap_dp_locale}}"></script>
     <script src="{{tinymce_js}}"></script>
 
+    <!-- TinyMce settings JavaScript
+    ================================================== -->
     <script>
      tinymce.init({
          selector: "textarea.tinymce",
@@ -155,6 +133,7 @@
          ]
      });
      </script>
+
 
 
 </body>

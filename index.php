@@ -42,10 +42,12 @@ require 'db/db.class.php';		                	// zajisti pristup k db a spolecne 
 
 /** ========================================================================= */
 //datove struktury
-//require 'application/core/data/hrac.class.php';
-//require 'application/core/data/misto.class.php';
-//require 'application/core/data/hra.class.php';
-//require 'application/core/data/uvedeni.class.php';
+
+require 'core/objects/artefact.class.php';
+require 'core/objects/category.class.php';
+require 'core/objects/right.class.php';
+require 'core/objects/user.class.php';
+
 
 /** ========================================================================= */
 
@@ -54,6 +56,7 @@ $logger->debug("After all modules loaded");
 // start the application
 $logger->debug("Create application");
 $app = new app();
+$app->run();
 
 $logger->debug("Database connect");
 $app->connectDB();
@@ -73,7 +76,6 @@ if(@$_REQUEST["do"] == "logout"){
 /** debug part */
 
 $logger->debug("Prepare twig template");
-Twig_Autoloader::register();
 $loader = new Twig_Loader_Filesystem('templates'); // path to folder with templates
 $twig = new Twig_Environment($loader); // no cache
 

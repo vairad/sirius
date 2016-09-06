@@ -7,3 +7,6 @@
 #ignore composer file composer.phar
 composer.phar
 
+#ignore old web folder
+/old-web/
+

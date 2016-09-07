@@ -3,11 +3,10 @@
  *
  *
  */
-class user
+class user extends generic_object
 {
-    private $logger;
-
     public function user(){
+        $this->generic_object();
         $this->logger = Logger::getLogger("user-app");
         $this->logger->info("Object constructor");
     }

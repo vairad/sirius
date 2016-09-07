@@ -3,11 +3,10 @@
  *
  *
  */
-class category
+class category extends generic_object
 {
-    private $logger;
-
     public function category(){
+        $this->generic_object();
         $this->logger = Logger::getLogger("category-app");
         $this->logger->info("Object constructor");
     }

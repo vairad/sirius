@@ -43,6 +43,8 @@ require 'db/db.class.php';		                	// zajisti pristup k db a spolecne 
 /** ========================================================================= */
 //datove struktury
 
+require 'core/objects/generic_object.class.php';
+
 require 'core/objects/artefact.class.php';
 require 'core/objects/category.class.php';
 require 'core/objects/right.class.php';

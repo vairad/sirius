@@ -22,6 +22,8 @@ class generic_object
         return $bool;
     }
 
-
+    public function toString(){
+        return "Object is not correctly extended! ERROR";
+    }
 
 }

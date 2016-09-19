@@ -25,6 +25,21 @@ class user extends generic_object
         $this->generic_object();
         $this->logger = Logger::getLogger("user-app");
         $this->logger->info("Object constructor");
+
+        $this->set_up["id"] = false;
+        $this->set_up["login"] = false;
+        $this->set_up["name"] = false;
+        $this->set_up["password"] = false;
+        $this->set_up["create_time"] = false;
+        $this->set_up["last_log_time"] = false;
+        $this->set_up["mail"] = false;
+//        $this->set_up["nick"] = false;              // not necessary to save to db
+//        $this->set_up["bio"] = false;               // not necessary to save to db
+        $this->set_up["function"] = false;
+        $this->set_up["photo"] = false;
+//        $this->set_up["rights"] = false;            // not necessary to save to db
+        $this->set_up["verified"] = false;
+//        $this->set_up["cookie"] = false;            // not necessary to save to db
     }
 
 

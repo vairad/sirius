@@ -24,13 +24,16 @@ class app
     }
 
     /**
-     * Pripojit k databazi.
+     * Method establish connection to database.
      */
     public function connectDB()
     {
         $this->db->Connect();
     }
 
+    /**
+     * Method fill in fields in footer.
+     */
     public function createFooter(){
         global $data;
         $data["footer_left_a"] = "http://www.skauti-doubravka.cz";

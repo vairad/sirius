@@ -24,8 +24,8 @@ $data["success"] = array();
 // load configuration
 require 'conf/config.inc.php';
 require 'conf/functions.inc.php'; //helpful functions
-require 'conf/style.inc.php';
 require 'conf/text.cs.php';
+require 'conf/style.inc.php';
 //require 'conf/const.inc.php';
 
 
@@ -76,6 +76,10 @@ if(@$_REQUEST["do"] == "logout"){
 /** debug part */
 // printr($data);
 /** debug part */
+
+$skautIS = \SkautIS\SkautIS::getInstance();
+$skautIS->setAppId("59a4cf4a-51ea-4cbb-892d-1a2b3df38654");
+$skautIS->setTestMode(TRUE);
 
 $logger->debug("Prepare twig template");
 $loader = new Twig_Loader_Filesystem('templates'); // path to folder with templates

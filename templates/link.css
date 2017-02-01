@@ -1,0 +1,47 @@
+#sf .lg {
+    background-color: #334bdc;
+}
+#sf .dg {
+    background-color: #2b3da0;
+}
+
+#services {
+    background: #334bdc;
+}
+
+.menu h1.logo a:hover {
+    color: #334bdc;
+}
+
+
+.btn-green {
+    background-color: #334bdc;
+    border-color: #334bdc;
+}
+.btn-green:hover, .btn-green:focus, .btn-green:active, .btn-green.active, .open .dropdown-toggle.btn-green {
+    background-color: #2b3da0;
+    border-color: #2b3da0;
+}
+
+a {
+    color: #2b3da0;
+}
+
+.rajce{
+    width: 69px;
+    height: 70px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#text2 {
+    resize: none;
+}
+
+.justify{
+    text-align: justify;
+}
+
+.lightHref{
+    color: #334bdc;
+}

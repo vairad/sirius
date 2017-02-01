@@ -54,7 +54,7 @@ define('MY_SES', "sirius_session_AfxDGl");
     define('DB_TYPE', 'mysql');
     define('DB_HOST', '127.0.0.1');
     define('DB_DATABASE_NAME', 'sirius');
-    define('DB_USER_LOGIN', 'root');
+    define('DB_USER_LOGIN', 'sirius');
     define('DB_USER_PASSWORD', '');
 
 // online

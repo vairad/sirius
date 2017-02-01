@@ -5,8 +5,25 @@
         "twig/twig": "1.*",
         "twbs/bootstrap": "^3.3",
         "tinymce/tinymce": "4.2.4",
-        "apache/log4php": "2.3.0"
+        "apache/log4php": "2.3.0",
+        "facebook/php-sdk-v4" : "~5.0",
+        "jquery/jquery": "*" ,
+        "skautis/skautis": "1.2.*"
     },
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "jquery/jquery",
+                "version": "1.10.2",
+                "type": "jquery",
+                "dist": {
+                    "url": "https://code.jquery.com/jquery-1.10.2.min.js",
+                    "type": "file"
+                }
+            }
+        }
+    ],
     "authors": [
         {
             "name": "Radek Vais",

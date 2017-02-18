@@ -5,13 +5,15 @@
  */
 class app
 {
+
+
     // connection to the database
     private $db = null;
     private $data;
 
     private $logger;
 
-    public function app(){
+    public function __construct(){
         global $data;
         $this->logger = Logger::getLogger("app");
         $this->db = new db();

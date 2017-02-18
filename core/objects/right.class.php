@@ -11,8 +11,8 @@ class right extends generic_object
     private $title;
 
 
-    public function right(){
-        $this->generic_object();
+    public function __construct(){
+        parent::__construct();
         $this->logger = Logger::getLogger("right-app");
         $this->logger->info("Object constructor");
 

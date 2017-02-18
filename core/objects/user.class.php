@@ -21,8 +21,8 @@ class user extends generic_object
     private $cookie;
 
 
-    public function user(){
-        $this->generic_object();
+    public function __construct(){
+        parent::__construct();
         $this->logger = Logger::getLogger("user-app");
         $this->logger->info("Object constructor");
 

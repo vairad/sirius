@@ -7,7 +7,7 @@ class generic_object
     //pole představující nastavení jednotlivých parametrů
     public $set_up = array();
 
-    public function generic_object(){
+    public function __construct(){
         $this->logger = Logger::getLogger("generic_object");
     }
 

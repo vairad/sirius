@@ -8,7 +8,7 @@ class db
     private $connection = null;
 
     /** Constructor of database connection */
-    public function db()
+    public function __construct()
     {
     }
 
@@ -62,9 +62,9 @@ class db
     /**
      * Nacist 1 zaznam z tabulky v DB.
      *
-     * @param string $table_name - jméno tabulky
-     * @param string $select_columns_string - jména sloupcù oddìlené èárkami, nebo jiné pøíkazy SQL
-     * @param array $where_array - seznam podmínek<br/>
+     * @param string $table_name - jmï¿½no tabulky
+     * @param string $select_columns_string - jmï¿½na sloupcï¿½ oddï¿½lenï¿½ ï¿½ï¿½rkami, nebo jinï¿½ pï¿½ï¿½kazy SQL
+     * @param array $where_array - seznam podmï¿½nek<br/>
      * 							[] - column = sloupec; value - int nebo string nebo value_mysql = now(); symbol
      * @param string $limit_string - doplnit limit string
      * @return array[]
@@ -477,8 +477,8 @@ class db
     /**
      * Smazat 1 zaznam z tabulky v DB.
      *
-     * @param string $table_name - jméno tabulky
-     * @param array $where_array - seznam podmínek<br/>
+     * @param string $table_name - jmï¿½no tabulky
+     * @param array $where_array - seznam podmï¿½nek<br/>
      * 							[] - column = sloupec; value - int nebo string nebo value_mysql = now(); symbol
      * @param string $limit_string - doplnit limit string
      * @return array[]

@@ -1,5 +1,17 @@
 <?php
 
+/** ========================================================================= */
+/** @var array[] storage for data to show by twig*/
+$data = array();
+
+/** ========================================================================= */
+// load configuration
+require 'conf/config.inc.php';
+require 'conf/functions.inc.php'; //helpful functions
+require 'conf/text.cs.php';
+require 'conf/style.inc.php';
+//require 'conf/const.inc.php';
+
 session_start();
 
 //load libraries prepared by composer
@@ -10,25 +22,13 @@ Logger::configure("./conf/logger.config.xml");
 $logger = Logger::getLogger("main");
 
 
-$logger->debug("Before loading of modules");
-/** ========================================================================= */
-/** @var array[] storage for data to show by twig*/
-$data = array();
+$logger->debug("Start PAGE");
+
 
 //preparation of arrays
 $data["data"] = array();
 $data["error"] = array();
 $data["success"] = array();
-
-/** ========================================================================= */
-// load configuration
-require 'conf/config.inc.php';
-require 'conf/functions.inc.php'; //helpful functions
-require 'conf/text.cs.php';
-require 'conf/style.inc.php';
-//require 'conf/const.inc.php';
-
-
 
 /** ========================================================================= */
 // nacist objekty - soubory .class.php
@@ -73,9 +73,7 @@ if(@$_REQUEST["do"] == "logout"){
 }
 */
 
-/** debug part */
-// printr($data);
-/** debug part */
+
 
 $skautIS = \SkautIS\SkautIS::getInstance();
 $skautIS->setAppId("59a4cf4a-51ea-4cbb-892d-1a2b3df38654");
@@ -86,9 +84,14 @@ $loader = new Twig_Loader_Filesystem('templates'); // path to folder with templa
 $twig = new Twig_Environment($loader); // no cache
 
 $logger->debug("Load chosen template (see style.inc.php)");
-$template = $twig->loadTemplate(TEMPLATE);
+$template = $twig->load(TEMPLATE);
 
 $logger->debug("Show result");
+
+/** debug part */
+// printr($data);
+/** debug part */
+
 echo $template->render($data);
 
 $logger->debug("End of index.php");

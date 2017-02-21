@@ -92,6 +92,9 @@ $logger->debug("Show result");
 // printr($data);
 /** debug part */
 
+
+$data["content"] = "title";
+
 echo $template->render($data);
 
 $logger->debug("End of index.php");

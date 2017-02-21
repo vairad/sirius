@@ -353,19 +353,19 @@ hr {
 }
 #portfolio {
     width: 100%}
-#services {
+#characteristics {
     background: #1abc9c;
     margin-top: 25px;
     padding-top: 35px;
     padding-bottom: 35px;
 }
-#services h3 {
+#characteristics h3 {
     color: #fff;
 }
-#services p {
+#characteristics p {
     color: #fff;
 }
-#services i {
+#characteristics i {
     color: #fff;
     font-size: 35px;
     margin-top: 22px;

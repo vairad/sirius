@@ -3,11 +3,11 @@
  *
  *
  */
-class artefact extends generic_object
+class artefact_type extends generic_object
 {
     public function __construct($db){
         parent::__construct($db);
-        $this->logger = Logger::getLogger("artefact-app");
+        $this->logger = Logger::getLogger("category-app");
         $this->logger->info("Object constructor");
     }
 

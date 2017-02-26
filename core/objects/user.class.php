@@ -5,45 +5,45 @@
  */
 class user extends generic_object
 {
+    // DB fields
     private $id;
-    private $login;
+    private $person_id;
     private $name;
-    private $password;
-    private $create_time;
-    private $last_log_time;
-    private $mail;
     private $nick;
+    private $surname;
     private $bio;
     private $function;
     private $photo;
-    private $rights;
     private $verified;
-    private $cookie;
+    private $last_log_time;
+
+    //loaded parameters
+    private $rights;
+    private $mail;
 
 
-    public function __construct(){
-        parent::__construct();
-        $this->logger = Logger::getLogger("user-app");
+
+    public function __construct($db){
+        parent::__construct($db);
+        $this->logger = Logger::getLogger("User-dataHolder");
         $this->logger->info("Object constructor");
 
         $this->set_up["id"] = false;
-        $this->set_up["login"] = false;
+        $this->set_up["person_id"] = false;
         $this->set_up["name"] = false;
-        $this->set_up["password"] = false;
-        $this->set_up["create_time"] = false;
+        $this->set_up["nick"] = false;
+        $this->set_up["surname"] = false;
         $this->set_up["last_log_time"] = false;
-        $this->set_up["mail"] = false;
+
+        $this->set_up["photo"] = false;
+        $this->set_up["verified"] = false;
+
 //        $this->set_up["nick"] = false;              // not necessary to save to db
 //        $this->set_up["bio"] = false;               // not necessary to save to db
-        $this->set_up["function"] = false;
-        $this->set_up["photo"] = false;
-//        $this->set_up["rights"] = false;            // not necessary to save to db
-        $this->set_up["verified"] = false;
-//        $this->set_up["cookie"] = false;            // not necessary to save to db
+//        $this->set_up["function"] = false;          // not necessary to save to db
     }
 
-
-    //===================================================================
+//==================================================================================
 
     public function getId()
     {
@@ -60,21 +60,21 @@ class user extends generic_object
 
 //===================================
 
-    public function getLogin()
+    public function getPersonId()
     {
-        $this->logger->trace("Get login");
-        return $this->login;
+        $this->logger->trace("Get PersonID");
+        return $this->person_id;
     }
 
-    public function setLogin($login)
+    public function setPersonId($id)
     {
-        $this->logger->debug("Set up login with:".$login);
-        $this->set_up["login"] = true;
-        $this->login = $login;
+        $this->logger->debug("Set up person_id with:".$id);
+        $this->set_up["person_id"] = true;
+        $this->person_id = $id;
     }
-
 
 //===================================
+
 
     public function getName()
     {
@@ -91,33 +91,34 @@ class user extends generic_object
 
 //===================================
 
-    public function getPassword()
+    public function getNick()
     {
-        $this->logger->trace("Get password");
-        return $this->password;
+        $this->logger->trace("Get nick");
+        return $this->nick;
     }
 
-    public function setPassword($password)
+    public function setNick($nick)
     {
-        $this->logger->debug("Set up password with:".$password);
-        $this->set_up["password"] = true;
-        $this->password = $password;
+        $this->logger->debug("Set up nick with:".$nick);
+        $this->set_up["nick"] = true;
+        $this->name = $nick;
     }
 
 //===================================
 
-    public function getCreateTime()
+    public function getSurname()
     {
-        $this->logger->trace("Get create_time");
-        return $this->create_time;
+        $this->logger->trace("Get surname");
+        return $this->surname;
     }
 
-    public function setCreateTime($create_time)
+    public function setSurname($surname)
     {
-        $this->logger->debug("Set up create_time with:".$create_time);
-        $this->set_up["create_time"] = true;
-        $this->create_time = $create_time;
+        $this->logger->debug("Set up surname with:".$surname);
+        $this->set_up["surname"] = true;
+        $this->name = $surname;
     }
+
 
 //===================================
 
@@ -145,24 +146,9 @@ class user extends generic_object
     public function setMail($mail)
     {
         $this->logger->debug("Set up mail with:".$mail);
-        $this->set_up["mail"] = true;
         $this->mail = $mail;
     }
 
-//===================================
-
-    public function getNick()
-    {
-        $this->logger->trace("Get nick");
-        return $this->nick;
-    }
-
-    public function setNick($nick)
-    {
-        $this->logger->debug("Set up nick with:".$nick);
-        $this->set_up["nick"] = true;
-        $this->nick = $nick;
-    }
 
 //===================================
 
@@ -242,30 +228,30 @@ class user extends generic_object
     }
 
 
-//===================================
 
-    public function getCookie()
-    {
-        $this->logger->trace("Get cookie");
-        return $this->cookie;
-    }
-
-    public function setCookie($cookie)
-    {
-        $this->logger->debug("Set up cookie with:".$cookie);
-        $this->set_up["cookie"] = true;
-        $this->cookie = $cookie;
-    }
-
-//============================================================================
+//=====================================================================================
     function toString()
     {
         if($this->isSetUp() == true){
-            return "ID: ".$this->id." NAME: ".$this->name." LOGIN: ".$this->login."";
+            return "ID: ".$this->id." NAME: ".$this->name." NICK: ".$this->nick."";
         }else{
             return "Object is not set up";
         }
     }
 
 
+    public function updateFromDB()
+    {
+        // TODO: Implement updateFromDB() method.
+    }
+
+    public function saveToDB()
+    {
+        // TODO: Implement saveToDB() method.
+    }
+
+    public function updateToDB()
+    {
+        // TODO: Implement updateToDB() method.
+    }
 }

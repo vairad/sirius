@@ -31,6 +31,9 @@ $data["error"] = array();
 $data["success"] = array();
 
 /** ========================================================================= */
+
+
+
 // nacist objekty - soubory .class.php
 require 'core/app.class.php';	                     // drzi hlavni funkcionalitu cele aplikace, obsahuje routing = navigovani po webu
 require 'db/db.class.php';		                	// zajisti pristup k db a spolecne metody pro dalsi pouziti
@@ -43,11 +46,13 @@ require 'db/db.class.php';		                	// zajisti pristup k db a spolecne 
 /** ========================================================================= */
 //datove struktury
 
+require 'core/objects/idatabase.interface.php';
+
 require 'core/objects/generic_object.class.php';
 
 require 'core/objects/artefact.class.php';
-require 'core/objects/category.class.php';
-require 'core/objects/right.class.php';
+require 'core/objects/artefact_type.class.php';
+require 'core/objects/user_role.class.php';
 require 'core/objects/user.class.php';
 
 

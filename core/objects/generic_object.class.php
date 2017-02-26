@@ -1,14 +1,19 @@
 <?php
 
-class generic_object
+abstract class generic_object implements IDatabase
 {
     //instance loggeru
-    public $logger;
+    protected $logger;
+
+    //instance db connection
+    protected $db;
+
     //pole představující nastavení jednotlivých parametrů
     public $set_up = array();
 
-    public function __construct(){
+    public function __construct($db){
         $this->logger = Logger::getLogger("generic_object");
+        $this->db = $db;
     }
 
     public function isSetUp(){
@@ -26,4 +31,20 @@ class generic_object
         return "Object is not correctly extended! ERROR";
     }
 
+    /**
+     * Update all DB properties of object. Whenever object loads any properties depending on DB parameters
+     * This method invoke reload all other fields.
+     * @return boolean
+     */
+    abstract public function updateFromDB();
+
+    /**
+     * @return boolean
+     */
+    public abstract function saveToDB();
+
+    /**
+     * @return boolean
+     */
+    public abstract function updateToDB();
 }

@@ -6,6 +6,7 @@
 
 #ignore composer file composer.phar
 composer.phar
+composer.lock
 
 #ignore old web folder
 /old-web/

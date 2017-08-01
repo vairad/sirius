@@ -3,7 +3,7 @@
  * Container for database object user rights.
  *
  */
-class right extends generic_object
+class user_role extends generic_object
 {
     private $id;
     private $name;
@@ -11,8 +11,8 @@ class right extends generic_object
     private $title;
 
 
-    public function __construct(){
-        parent::__construct();
+    public function __construct($db){
+        parent::__construct($db);
         $this->logger = Logger::getLogger("right-app");
         $this->logger->info("Object constructor");
 
@@ -91,5 +91,20 @@ class right extends generic_object
         }else{
             return "Object is not set up";
         }
+    }
+
+    public function updateFromDB()
+    {
+        // TODO: Implement updateFromDB() method.
+    }
+
+    public function saveToDB()
+    {
+        // TODO: Implement saveToDB() method.
+    }
+
+    public function updateToDB()
+    {
+        // TODO: Implement updateToDB() method.
     }
 }

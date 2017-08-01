@@ -6,33 +6,39 @@ class db
 {
 
     private $connection = null;
+    private $logger;
 
     /** Constructor of database connection */
     public function __construct()
     {
+        $this->logger =  Logger::getLogger("db");
+        $this->logger->info("DB object constructed");
     }
 
     /**
-     * Connect to selected database type
+     * Connect to selected database type.
+     * @see DB_TYPE at conf/config.inc.php
      */
     public function Connect()
     {
         if (DB_TYPE == 'mysql') {
+            $this->logger->info("Try to connect MySQL database");
             try {
                 $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',);
                 $this->connection = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_DATABASE_NAME . "", DB_USER_LOGIN, DB_USER_PASSWORD, $options);
             } catch (PDOException $e) {
+                $this->logger->error("PDO Exception " . $e->getMessage());
                 $message = "Error!: " . $e->getMessage() . "<br/>";
                 debugPrint($message);
                 die();
             }
         } elseif (DB_TYPE == 'pgsql') {
-
+            $this->logger->info("Try to connect PgSQL database");
             $message = "PgSQL connectivity is NOT implemented";
             debugPrint($message);
             die();
         } else {
-
+            $this->logger->error("Try to connect UNKNOWN type of database");
             $message = "Unknown database type. This type " . DB_TYPE . " is NOT implemented";
             debugPrint($message);
             die();
@@ -71,7 +77,6 @@ class db
      */
     public function DBSelectOne($table_name, $select_columns_string, $where_array, $limit_string = "")
     {
-        // PDO - MySQL
         //////printr($where_array);
 
         // vznik chyby v PDO
@@ -93,7 +98,7 @@ class db
                     $value_pom = "?"; 						// budu to navazovat
                 else if (key_exists("value_mysql", $item))
                     $value_pom = $item["value_mysql"]; 		// je to systemove, vlozit rovnou - POZOR na SQL injection, tady to muze projit
-
+                else $value_pom = "";
 
                 $where_pom .= "`$column` $symbol  $value_pom ";
             }
@@ -128,7 +133,6 @@ class db
 
         // 5) kontrola chyb
         $errors = $statement->errorInfo();
-        //////printr($errors);
 
         if ($errors[0] + 0 > 0)
         {
@@ -144,15 +148,14 @@ class db
         }
         else
         {
-            //echo "Chyba v dotazu - PDOStatement::errorInfo(): ";
-            //printr($errors);
-            //echo "SQL dotaz: $query";
+            $this->logger->error("Error in statement execution: " . $errors[2]);
+            $this->logger->info("Error query: " . $query);
             return false;
         }
     }
 
 
-    /**
+    /** ****************************************************************************************************************
      * Nacist vsechny zaznamy z tabulky.
      * Poznamka: tato metoda je stejna jako DBSelectOne - lisi se to jen posledni casti Fetch vs FetchAll
      *
@@ -197,7 +200,8 @@ class db
                     $value_pom = "?"; 						// budu to navazovat
                 else if (key_exists("value_mysql", $item))
                     $value_pom = $item["value_mysql"]; 		// je to systemove, vlozit rovnou - POZOR na SQL injection, tady to muze projit
-
+                else
+                    $value_pom = "";
 
                 //////echo "`$column` $symbol  $value_pom ";
                 $where_pom .= "`$column` $symbol  $value_pom ";
@@ -228,7 +232,7 @@ class db
 
 
         // 1) pripravit dotaz s dotaznikama
-        $query = "select $select_columns_string from `".$table_name."` $where_pom $order_by_pom $limit_string;";
+        $query = "select ".$select_columns_string." from `".$table_name."` $where_pom $order_by_pom $limit_string;";
         //////echo $query;
 
         // 2) pripravit si statement
@@ -256,7 +260,6 @@ class db
 
         // 5) kontrola chyb
         $errors = $statement->errorInfo();
-        //////printr($errors);
 
         if ($errors[0] + 0 > 0)
         {
@@ -272,14 +275,13 @@ class db
         }
         else
         {
-            //echo "Chyba v dotazu - PDOStatement::errorInfo(): ";
-            //printr($errors);
-            //echo "SQL dotaz: $query";
+            $this->logger->error("Error in statement execution: " . $errors[2]);
+            $this->logger->info("Error query: " . $query);
             return null;
         }
     }
 
-    /**
+    /** ****************************************************************************************************************
      *
      * Pridat polozku do DB - zakladni verze bez mysl fci typu now().
      * @param string $table_name
@@ -288,7 +290,6 @@ class db
      * */
     public function DBInsert($table_name, $item)
     {
-        // MySql
         $mysql_pdo_error = false;
 
         // SLOZIT TEXT STATEMENTU s otaznikama
@@ -327,7 +328,6 @@ class db
 
         // 5) kontrola chyb
         $errors = $statement->errorInfo();
-        //////printr($errors);
 
         if ($errors[0] + 0 > 0)
         {
@@ -343,15 +343,14 @@ class db
         }
         else
         {
-            //echo "Chyba v dotazu - PDOStatement::errorInfo(): ";
-            //printr($errors);
-            //echo "SQL dotaz: $query";
+            $this->logger->error("Error in statement execution: " . $errors[2]);
+            $this->logger->info("Error query: " . $query);
             return false;
         }
     }
 
 
-    /**
+    /** ****************************************************************************************************************
      * Pridat polozku do DB - rozsirena verze.
      *
      * @param string $table_name
@@ -399,7 +398,7 @@ class db
         $statement->execute();
         // 5) kontrola chyb
         $errors = $statement->errorInfo();
-        //////printr($errors);
+
         if ($errors[0] + 0 > 0)
         {
             // nalezena chyba
@@ -413,13 +412,13 @@ class db
         }
         else
         {
-            //echo "Chyba v dotazu - PDOStatement::errorInfo(): ";
-            //printr($errors);
-            //echo "SQL dotaz: $query";
+            $this->logger->error("Error in statement execution: " . $errors[2]);
+            $this->logger->info("Error query: " . $query);
+            return false;
         }
     }
 
-    /**
+    /** ****************************************************************************************************************
      * @param $table_name
      * @param $item
      * @param $where_str
@@ -455,7 +454,7 @@ class db
         $statement->execute();
         // 5) kontrola chyb
         $errors = $statement->errorInfo();
-        //////printr($errors);
+
         if ($errors[0] + 0 > 0)
         {
             // nalezena chyba
@@ -468,13 +467,14 @@ class db
         }
         else
         {
-            //echo "Chyba v dotazu - PDOStatement::errorInfo(): ";
-            //printr($errors);
-            //echo "SQL dotaz: $query";
+            $this->logger->error("Error in statement execution: " . $errors[2]);
+            $this->logger->info("Error query: " . $query);
             return false;
         }
     }
-    /**
+
+
+    /** ****************************************************************************************************************
      * Smazat 1 zaznam z tabulky v DB.
      *
      * @param string $table_name - jm�no tabulky
@@ -528,10 +528,9 @@ class db
         $statement->execute();
         // 5) kontrola chyb
         $errors = $statement->errorInfo();
-        //////printr($errors);
+
         if ($errors[0] + 0 > 0)
         {
-            // nalezena chyba
             $mysql_pdo_error = true;
         }
         // 6) nacist data a vratit
@@ -541,9 +540,8 @@ class db
         }
         else
         {
-            //echo "Chyba v dotazu - PDOStatement::errorInfo(): ";
-            //printr($errors);
-            //echo "SQL dotaz: $query";
+            $this->logger->error("Error in statement execution: " . $errors[2]);
+            $this->logger->info("Error query: " . $query);
             return $errors;
         }
     }

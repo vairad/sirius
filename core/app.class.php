@@ -95,10 +95,10 @@ class app
     //todo delete
     private function test_objects(){
         $this->logger->info("Start testing");
-        $object = new artefact();
-        $object = new category();
-        $object = new right();
-        $object = new user();
+        $object = new artefact($this->db);
+        $object = new artefact_type($this->db);
+        $object = new user_role($this->db);
+        $object = new user($this->db);
         $this->logger->info("End testing");
     }
 
